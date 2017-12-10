@@ -1,5 +1,5 @@
 <div style="height:60px;background-color:#F8BBD0;">
-    <h1 align="center"><img src="<?=base_url()?>assets/img/logo/peaw.png" height="40px;"/>PEAW Bekery SHOP </h1>
+    <h1 align="center"><img src="<?=base_url()?>assets/img/logo/peaw.png" height="40px;"/>PEAW Bakery Shop </h1>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-navbar">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,9 +38,17 @@
     </div>
     <div class="form-inline mt-2 mt-md-0">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a href="<?=base_url();?>index.php/user/register" class="nav-link btn btn-outline-success">สมัครสมาชิก</a></li>
             &nbsp;
-            <li class="nav-item"><a href="<?=base_url();?>index.php/user/login" class="nav-link btn btn-outline-success">เข้าสู่ระบบ</a></li>
+            <!-- <li class="nav-item"><?php var_dump($_SESSION)?></li> -->
+            <?php if (isset($_SESSION['sessed_in'])){ ?>
+            <li class="nav-item">ยินดีต้อนรับ :<?=$_SESSION['sessed_in'][0]['u_email'];?></li>
+            &nbsp;
+            <li class="nav-item"><a href="<?=base_url();?>index.php/user/logout" class="nav-link btn btn-outline-success">ออกจากระบบ</a></li>
+            <?php }else{ ?>
+            <li class="nav-item"><a href="<?=base_url();?>index.php/user/from_register" class="nav-link btn btn-outline-success">สมัครสมาชิก</a></li>
+            &nbsp;
+            <li class="nav-item"><a href="<?=base_url();?>index.php/user/from_login" class="nav-link btn btn-outline-success">เข้าสู่ระบบ</a></li>
+            <?php } ?>
         </ul>
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
     </div>

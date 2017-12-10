@@ -1,9 +1,9 @@
 <div class="container">
-    <form class="form-horizontal" role="form" method="POST" action="/login">
+    <form class="form-horizontal" role="form" method="POST" action="<?=base_url();?>index.php/user/login">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <h2>Please Login</h2>
+                <h2 align="center">เข้าสู่ระบบ</h2>
                 <hr>
             </div>
         </div>
@@ -17,13 +17,6 @@
                         <input type="text" name="email" class="form-control" id="email"
                                 placeholder="you@example.com" required autofocus>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-control-feedback">
-                    <span class="text-danger align-middle">
-                        <i class="fa fa-close"></i> Example error message
-                    </span>
                 </div>
             </div>
         </div>
@@ -47,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6" style="padding-top: .35rem">
                 <div class="form-check mb-2 mr-sm-2 mb-sm-0">
@@ -58,12 +51,12 @@
                     </label>
                 </div>
             </div>
-        </div>
-        <div class="row" style="padding-top: 1rem">
+        </div> -->
+        <div class="row" style="padding-top: 1rem" align="center">
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-success"><i class="fa fa-sign-in"></i> Login</button>
-                <a class="btn btn-link" href="/password/reset">Forgot Your Password?</a>
+                <!-- <a class="btn btn-link" href="/password/reset">Forgot Your Password?</a> -->
             </div>
         </div>
     </form>

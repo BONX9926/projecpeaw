@@ -1,0 +1,1 @@
+<h2 align="center" class="text-success" style="margin: 20px 0px 205px 0px;">เพิ่มสมาชิกได้สำเร็จ <br><small>กรุณาเข้าสู่ระบบ</small></h2>
