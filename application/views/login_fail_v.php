@@ -1,1 +1,1 @@
-<h2 align="center" class="text-danger" style="margin: 20px 0px 205px 0px;">ไม่สามารถเข้าสู่ระบบได้ <small>กรุณาตรวจสอบข้อมูล</small> <br><small><a href="<?=base_url();?>index.php/user/from_register">กลับ</a></small></h2>
+<h2 align="center" class="text-danger" style="margin: 20px 0px 205px 0px;">ไม่สามารถเข้าสู่ระบบได้ <small>กรุณาตรวจสอบข้อมูล</small> <br><small><a href="<?=base_url();?>index.php/user/from_login">กลับ</a></small></h2>

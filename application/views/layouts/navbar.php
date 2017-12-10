@@ -43,6 +43,10 @@
             <?php if (isset($_SESSION['sessed_in'])){ ?>
             <li class="nav-item">ยินดีต้อนรับ :<?=$_SESSION['sessed_in'][0]['u_email'];?></li>
             &nbsp;
+            <?php if($_SESSION['sessed_in'][0]['u_type'] == 'a') { ?>
+            <li class="nav-item"><a href="<?=base_url();?>index.php/backend" class="nav-link btn btn-outline-success">ระบบจัดการ</a></li>
+            &nbsp;
+            <?php } ?>
             <li class="nav-item"><a href="<?=base_url();?>index.php/user/logout" class="nav-link btn btn-outline-success">ออกจากระบบ</a></li>
             <?php }else{ ?>
             <li class="nav-item"><a href="<?=base_url();?>index.php/user/from_register" class="nav-link btn btn-outline-success">สมัครสมาชิก</a></li>

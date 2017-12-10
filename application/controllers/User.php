@@ -24,7 +24,7 @@ class User extends CI_Controller {
 		$phone = $input['phone'];
 		$email = $input['email'];
 		$pass = sha1(md5(sha1($input['password'])));
-		$datetime = date('yy-mm-dd H:i:s');
+		$datetime = date('y-m-d H:i:s');
 		$data = array(
 			'u_name' 	 => $name,
 			'u_phone' 	 => $phone,
