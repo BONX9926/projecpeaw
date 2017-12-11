@@ -115,4 +115,29 @@ class User extends CI_Controller {
 		$this->session->unset_userdata('sessed_in');
 		redirect('/');
 	}
+
+	public function user_all()
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('u_type', 'u');
+		$this->db->order_by('created_at','desc');
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$res = $query->result();
+		}else{
+			$res = null;
+		}
+
+		return $res;
+
+	}
+
+	public function get_user()
+	{
+		$data['rows'] = $this->user_all();
+		$this->load->view('backend/users/users_v', $data);
+	}
+
+
 }

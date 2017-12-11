@@ -46,18 +46,21 @@
         body {
             font-family: 'Itim', cursive;
         }
+        .active{ 
+          /* border-left: 4px solid #3b25e6; */
+
+        }
+
+        nav.side-navbar ul li.active a {
+            /* background: #796AEE; */
+            /* color: #ffffff; */
+        }
     </style>
     <div class="page home-page">
       <!-- Main Navbar-->
       <header class="header">
         <nav class="navbar">
-          <!-- Search Box-->
-          <!-- <div class="search-box">
-            <button class="dismiss"><i class="icon-close"></i></button>
-            <form id="searchForm" action="#" role="search">
-              <input type="search" placeholder="What are you looking for..." class="form-control">
-            </form>
-          </div> -->
+
           <div class="container-fluid">
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <!-- Navbar Header-->
@@ -69,55 +72,6 @@
               </div>
               <!-- Navbar Menu -->
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                <!-- Search-->
-                <!-- <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li> -->
-                <!-- Notifications-->
-                <!-- <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red">12</span></a>
-                  <ul aria-labelledby="notifications" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification">
-                          <div class="notification-content"><i class="fa fa-envelope bg-green"></i>You have 6 new messages </div>
-                          <div class="notification-time"><small>4 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification">
-                          <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
-                          <div class="notification-time"><small>4 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification">
-                          <div class="notification-content"><i class="fa fa-upload bg-orange"></i>Server Rebooted</div>
-                          <div class="notification-time"><small>4 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification">
-                          <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
-                          <div class="notification-time"><small>10 minutes ago</small></div>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>
-                  </ul>
-                </li> -->
-                <!-- Messages                        -->
-                <!-- <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><span class="badge bg-orange">10</span></a>
-                  <ul aria-labelledby="notifications" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
-                        <div class="msg-profile"> <img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="msg-body">
-                          <h3 class="h5">Jason Doe</h3><span>Sent You Message</span>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
-                        <div class="msg-profile"> <img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="msg-body">
-                          <h3 class="h5">Frank Williams</h3><span>Sent You Message</span>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
-                        <div class="msg-profile"> <img src="img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="msg-body">
-                          <h3 class="h5">Ashley Wood</h3><span>Sent You Message</span>
-                        </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages    </strong></a></li>
-                  </ul>
-                </li> -->
                 <!-- Logout    -->
                 <li class="nav-item"><a href="<?=base_url();?>index.php/user/logout" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
               </ul>
@@ -130,7 +84,7 @@
         <nav class="side-navbar">
           <!-- Sidebar Header-->
           <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="<?=base_url();?>asstes/backend/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+            <!-- <div class="avatar"><img src="<?=base_url();?>asstes/backend/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div> -->
             <div class="title">
             <?php if (isset($_SESSION['sessed_in'])){ ?>
               <h1 class="h4"><?=$_SESSION['sessed_in'][0]['u_email'];?></h1>
@@ -138,41 +92,82 @@
             <?php } ?>
             </div>
           </div>
-          <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+          <!-- Sidebar Navidation Menus-->
+          <span class="heading">Main</span>
           <ul class="list-unstyled">
-            <li class="active"> <a href="index.html"><i class="icon-home"></i>Home</a></li>
-            <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Dropdown </a>
+            <li class="ac" id="users"> <a href="#"><i class="icon-user"></i>สมาชิก</a></li>
+            <li class="ac"> <a href="#"><i class="icon-home"></i>รายการสั่งซื้อ</a></li>
+            <!-- <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Dropdown </a>
               <ul id="dashvariants" class="collapse list-unstyled">
                 <li><a href="#">Page</a></li>
                 <li><a href="#">Page</a></li>
                 <li><a href="#">Page</a></li>
                 <li><a href="#">Page</a></li>
               </ul>
-            </li>
-            <li> <a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
-            <li> <a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>
-            <li> <a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>
-            <li> <a href="login.html"> <i class="icon-interface-windows"></i>Login Page</a></li>
-          </ul><span class="heading">Extras</span>
+            </li> -->
+            <li class="ac" id="best_seller"> <a href="#"> <i class="icon-grid"></i>สินค้าขายดี </a></li>
+            <li class="ac"> <a href="#"> <i class="fa fa-bar-chart"></i>สินค้าทั้งหมด</i> </a></li>
+            <li class="ac"> <a href="#"> <i class="icon-padnote"></i>Forms </a></li>
+            <li class="ac"> <a href="#"> <i class="icon-interface-windows"></i>Login Page</a></li>
+          </ul>
+          <!-- <span class="heading">Extras</span>
           <ul class="list-unstyled">
             <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
-          </ul>
+          </ul> -->
         </nav>
         <div class="content-inner" id="content">
-
+              
         </div>
       </div>
     </div>
+<script src="<?=base_url();?>assets/js/jquery-3.2.1.js"></script>
+<script src="<?=base_url();?>assets/backend/vendor/popper.js/umd/popper.min.js"> </script>
+<script src="<?=base_url();?>assets/backend/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?=base_url();?>assets/backend/vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="<?=base_url();?>assets/backend/vendor/jquery-validation/jquery.validate.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/backend/js/Chart.min.js"></script> -->
+<!-- <script src="<?=base_url();?>assets/backend/js/charts-home.js"></script> -->
+<script src="<?=base_url();?>assets/backend/js/front.js"></script>
 <script>
-    function home(){
-        $.get("url", data,
-          function (data, textStatus, jqXHR) {
-            
-          },
-          "dataType"
-        );
+
+$('.ac').click(function(){
+  $('.ac').removeClass('active');
+  $(this).addClass('active');
+  var id = $(this).attr('id');
+  getpage(id);
+});
+
+function getpage(id){
+  if (id == 'users') {
+    member();
+  }else if (id == 'best_seller'){
+    best_seller();
+  }
+}
+
+function member(){
+  $.get("<?=base_url();?>index.php/user/get_user",
+    function () { 
     }
+  ).done(function(data){
+    $('#content').html('<h1>Loading...</h1>');
+    $('#content').html(data);
+    // $('#users').click();
+  });
+}
+
+member();
+
+function best_seller(){
+  $.get("<?=base_url();?>index.php/products",
+    function () { 
+    }
+  ).done(function(data){
+    $('#content').html('<h1>Loading...</h1>');
+    $('#content').html(data);
+  });
+}
 </script>
