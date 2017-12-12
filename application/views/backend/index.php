@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="<?=base_url();?>assets/backend/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="<?=base_url();?>assets/backend/css/custom.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/backend/css/simply-toast.min.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="favicon.png">
+    <!-- <link rel="shortcut icon" href="favicon.png"> -->
     <style>
         @font-face {
             font-family: 'Itim';
@@ -45,6 +46,7 @@
         }
         body {
             font-family: 'Itim', cursive;
+            font-size: 18px;
         }
         .active{ 
           /* border-left: 4px solid #3b25e6; */
@@ -95,7 +97,7 @@
           <!-- Sidebar Navidation Menus-->
           <span class="heading">Main</span>
           <ul class="list-unstyled">
-            <li class="ac" id="users"> <a href="#"><i class="icon-user"></i>สมาชิก</a></li>
+            <li class="ac active" id="users"> <a href="#"><i class="icon-user"></i>สมาชิก</a></li>
             <li class="ac"> <a href="#"><i class="icon-home"></i>รายการสั่งซื้อ</a></li>
             <!-- <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Dropdown </a>
               <ul id="dashvariants" class="collapse list-unstyled">
@@ -106,7 +108,7 @@
               </ul>
             </li> -->
             <li class="ac" id="best_seller"> <a href="#"> <i class="icon-grid"></i>สินค้าขายดี </a></li>
-            <li class="ac"> <a href="#"> <i class="fa fa-bar-chart"></i>สินค้าทั้งหมด</i> </a></li>
+            <li class="ac" id="products_all"> <a href="#"> <i class="fa fa-bar-chart"></i>สินค้าทั้งหมด</i> </a></li>
             <li class="ac"> <a href="#"> <i class="icon-padnote"></i>Forms </a></li>
             <li class="ac"> <a href="#"> <i class="icon-interface-windows"></i>Login Page</a></li>
           </ul>
@@ -131,6 +133,7 @@
 <!-- <script src="<?=base_url();?>assets/backend/js/Chart.min.js"></script> -->
 <!-- <script src="<?=base_url();?>assets/backend/js/charts-home.js"></script> -->
 <script src="<?=base_url();?>assets/backend/js/front.js"></script>
+<script src="<?=base_url();?>assets/backend/js/simply-toast.min.js"></script>
 <script>
 
 $('.ac').click(function(){
@@ -144,7 +147,9 @@ function getpage(id){
   if (id == 'users') {
     member();
   }else if (id == 'best_seller'){
-    best_seller();
+    // best_seller();
+  }else if (id == 'products_all'){
+    products_all();
   }
 }
 
@@ -161,7 +166,7 @@ function member(){
 
 member();
 
-function best_seller(){
+function products_all(){
   $.get("<?=base_url();?>index.php/products",
     function () { 
     }
