@@ -67,7 +67,7 @@
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <!-- Navbar Header-->
               <div class="navbar-header">
-                <!-- Navbar Brand --><a href="index.html" class="navbar-brand">
+                <!-- Navbar Brand --><a href="<?=base_url();?>index.php" class="navbar-brand">
                   <div class="brand-text brand-big"><span>Peaw </span><strong>Bakery</strong></div>
                   <div class="brand-text brand-small"><strong>PB</strong></div></a>
                 <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
@@ -109,16 +109,8 @@
             </li> -->
             <li class="ac" id="best_seller"> <a href="#"> <i class="icon-grid"></i>สินค้าขายดี </a></li>
             <li class="ac" id="products_all"> <a href="#"> <i class="fa fa-bar-chart"></i>สินค้าทั้งหมด</i> </a></li>
-            <li class="ac"> <a href="#"> <i class="icon-padnote"></i>Forms </a></li>
-            <li class="ac"> <a href="#"> <i class="icon-interface-windows"></i>Login Page</a></li>
           </ul>
-          <!-- <span class="heading">Extras</span>
-          <ul class="list-unstyled">
-            <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
-          </ul> -->
+          <span style="height:35vh">&nbsp;</span>
         </nav>
         <div class="content-inner" id="content">
               
@@ -147,7 +139,7 @@ function getpage(id){
   if (id == 'users') {
     member();
   }else if (id == 'best_seller'){
-    // best_seller();
+    best_seller();
   }else if (id == 'products_all'){
     products_all();
   }
@@ -168,6 +160,16 @@ member();
 
 function products_all(){
   $.get("<?=base_url();?>index.php/products",
+    function () { 
+    }
+  ).done(function(data){
+    $('#content').html('<h1>Loading...</h1>');
+    $('#content').html(data);
+  });
+}
+
+function best_seller(){
+  $.get("<?=base_url();?>index.php/products/best_seller",
     function () { 
     }
   ).done(function(data){

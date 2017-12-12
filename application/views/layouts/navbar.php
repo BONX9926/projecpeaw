@@ -1,5 +1,5 @@
 <div style="height:60px;background-color:#F8BBD0;">
-    <h1 align="center"><img src="<?=base_url()?>assets/img/logo/peaw.png" height="40px;"/>PEAW Bakery Shop </h1>
+    <h1><img src="<?=base_url()?>assets/img/logo/peaw.png" height="40px;"/>PEAW Bakery Shop <button class="btn btn-success"><span class="fa fa-shopping-bag"></span> <span class="items"><?=var_dump($_SESSION['bag'])?></span></button></h1>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-navbar">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,14 +19,22 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             สินค้าของเรา
             </a>
+            <?php 
+                $this->db->select('*');
+                $this->db->from('product_type');
+                $query = $this->db->get(); 
+
+                if($query){
+                    $data = $query->result();
+                }else{
+                    $data = null;
+                }
+
+            ?>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">ขนมปัง</a>
-            <a class="dropdown-item" href="#">เค้ก</a>
-            <a class="dropdown-item" href="#">พายชั้น</a>
-            <a class="dropdown-item" href="#">เดนนิส/ครัวซอง</a>
-            <a class="dropdown-item" href="#">ชอร์ตโด, คุกกี้, พายร่วน และทาร์ต</a>
-            <a class="dropdown-item" href="#">ชูเพสต์ / เอแคร์</a>
-            <a class="dropdown-item" href="#">ครีมคัสตาด ไส้ขนมต่างๆ</a>
+            <?php foreach ($data as $key => $type) { ?>
+                <a class="dropdown-item" href="<?=base_url();?>index.php/products/pro/<?=$type->protype_id;?>"><?=$type->name;?></a>
+            <?php } ?>
             <!-- <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>
             </div> -->

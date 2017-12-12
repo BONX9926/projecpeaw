@@ -1,5 +1,3 @@
-
-<br><br><br>
 <h1 align="center">แก้ไขรายการขนมปัง</h1>
 <form id="fromba1" method="POST" enctype="multipart/formdata">
     <div class="form-row">
@@ -13,9 +11,19 @@
             <input type="text" class="form-control" name="pro_price" id="" value="<?=$rows[0]->pro_price;?>" placeholder="ราคา">
         </div>
     </div>
-    <div class="form-group">
-        <label>รูปสินค้า</label>
-        <input type="file" name="pro_pic" class="form-control">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>รูปสินค้า</label>
+            <input type="file" name="pro_pic" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label>ประเภทเบเกอรี่</label>
+            <select name="pro_type" id="" class="form-control">
+                <?php foreach ($pro_type as $key => $pro) { ?>
+                    <option value="<?=$pro->protype_id;?>" <?= ($pro->protype_id == $rows[0]->pro_type) ? "selected='selected'" : ''; ?> ><?=$pro->name;?></option>
+                <?php } ?>
+            </select>
+        </div>
     </div>
     <div class="form-group">
         <label>รายละเอียด</label>

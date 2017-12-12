@@ -57,6 +57,7 @@ class User extends CI_Controller {
 		$res = $this->check_login($input['email'], $input['password']);
 		if($res['status']){
 			$this->session->set_userdata('sessed_in',$res['session']);
+			$this->session->set_userdata('bag',$res['bag']);
 			$this->load->view('layouts/header');
 			$this->load->view('layouts/navbar');
 			$this->load->view('index');
@@ -96,6 +97,7 @@ class User extends CI_Controller {
 				$res['status']  = true;
 				$res['message'] = 'เข้าสู่ระบบสำเร็จ';
 				$res['session'] = $query->result_array();
+				$res['bag'] = array();
 
 			}else{
 				$res['status']  = false;

@@ -3,18 +3,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Bakery1 extends CI_Controller {
 
-    public function page_add()
+    public function pro_type()
     {
-        $this->load->view('backend/products/bakery1/ba1Add_v');
+        $this->db->select('*');
+        $this->db->from('product_type');
+        $query = $this->db->get();
+
+        if ($query) {
+            $res = $query->result();
+        }else{
+            $res = null;
+        }
+        return $res;
     }
 
-    public function page_edit($pro_id)
+    public function page_add()
+    {
+        $data['pro_type'] = $this->pro_type();
+        $this->load->view('backend/products/add_bakery_v', $data);
+    }
+
+    public function page_edit($pro_id, $pro_type)
     {
         $this->db->select('*');
         $this->db->from('products');
         $this->db->where('pro_id', $pro_id);
         $this->db->where('active', '1');
-        $this->db->where('pro_type', '1');
+        $this->db->where('pro_type',  $pro_type);
         $query = $this->db->get();
 
         if ($query) {
@@ -22,8 +37,8 @@ class Bakery1 extends CI_Controller {
         }else{
             $data['rows'] = null;
         }
-
-        $this->load->view('backend/products/bakery1/ba1Edit_v', $data);
+        $data['pro_type'] = $this->pro_type();
+        $this->load->view('backend/products/edit_bakery_v', $data);
     }
 
     public function add()
@@ -41,7 +56,7 @@ class Bakery1 extends CI_Controller {
                     'pro_detail' => $input['pro_detail'],
                     'pro_detail' => $input['pro_detail'],
                     'pro_pic'    => $namefile,
-                    'pro_type'   => '1',
+                    'pro_type'   => $input['pro_type'],
                     'created_at' => $date,
                     'updated_at' => $date
                 );
@@ -64,7 +79,7 @@ class Bakery1 extends CI_Controller {
                 'pro_price'  => $input['pro_price'],
                 'pro_detail' => $input['pro_detail'],
                 'pro_detail' => $input['pro_detail'],
-                'pro_type'   => '1',
+                'pro_type'   => $input['pro_type'],
                 'created_at' => $date,
                 'updated_at' => $date
             );
@@ -97,6 +112,7 @@ class Bakery1 extends CI_Controller {
                     'pro_detail' => $input['pro_detail'],
                     'pro_detail' => $input['pro_detail'],
                     'pro_pic'    => $namefile,
+                    'pro_type'   => $input['pro_type'],
                     'updated_at' => $date
                 );
                 $this->db->where('pro_id', $input['pro_id']);
@@ -119,6 +135,7 @@ class Bakery1 extends CI_Controller {
                 'pro_price'  => $input['pro_price'],
                 'pro_detail' => $input['pro_detail'],
                 'pro_detail' => $input['pro_detail'],
+                'pro_type'   => $input['pro_type'],
                 'updated_at' => $date
             );
             $this->db->where('pro_id',  $input['pro_id']);

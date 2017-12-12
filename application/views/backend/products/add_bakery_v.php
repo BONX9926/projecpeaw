@@ -1,6 +1,5 @@
 
-<br><br><br>
-<h1 align="center">เพิ่มรายการขนมปัง</h1>
+<h1 align="center">เพิ่มรายการเบเกอรี่</h1>
 <form id="fromba1" method="POST" enctype="multipart/formdata">
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -12,9 +11,19 @@
             <input type="text" class="form-control" name="pro_price" id="" placeholder="ราคา">
         </div>
     </div>
-    <div class="form-group">
-        <label>รูปสินค้า</label>
-        <input type="file" name="pro_pic" class="form-control">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>รูปสินค้า</label>
+            <input type="file" name="pro_pic" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label>ประเภทเบเกอรี่ <small class="text-danger">(กรุณาเลือกประเภท)</small></label>
+            <select name="pro_type" id="" class="form-control">
+                <?php foreach ($pro_type as $key => $pro) { ?>
+                    <option value="<?=$pro->protype_id;?>"><?=$pro->name;?></option>
+                <?php } ?>
+            </select>
+        </div>
     </div>
     <div class="form-group">
         <label>รายละเอียด</label>
