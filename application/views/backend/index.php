@@ -98,7 +98,7 @@
           <span class="heading">Main</span>
           <ul class="list-unstyled">
             <li class="ac active" id="users"> <a href="#"><i class="icon-user"></i>สมาชิก</a></li>
-            <li class="ac"> <a href="#"><i class="icon-home"></i>รายการสั่งซื้อ</a></li>
+            <li class="ac" id="orders"> <a href="#"><i class="icon-home"></i>รายการสั่งซื้อ</a></li>
             <!-- <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Dropdown </a>
               <ul id="dashvariants" class="collapse list-unstyled">
                 <li><a href="#">Page</a></li>
@@ -142,8 +142,21 @@ function getpage(id){
     best_seller();
   }else if (id == 'products_all'){
     products_all();
+  }else if (id == 'orders'){
+    orders();
   }
 }
+function orders(){
+  $.get("<?=base_url();?>index.php/order",
+    function () { 
+    }
+  ).done(function(data){
+    $('#content').html('<h1>Loading...</h1>');
+    $('#content').html(data);
+    // $('#users').click();
+  });
+}
+
 
 function member(){
   $.get("<?=base_url();?>index.php/user/get_user",

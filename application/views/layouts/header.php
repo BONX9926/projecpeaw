@@ -1,9 +1,11 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="<?=base_url();?>assets/backend/css/simply-toast.min.css">
 <!-- <link rel="stylesheet" href="<?=base_url();?>assets/fonts/LayijiMahaniyom-Bao-1.2.ttf"> -->
 <script src="<?=base_url();?>assets/js/jquery-3.2.1.js"></script>
 <script src="<?=base_url();?>assets/js/popper.min.js"></script>
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
+<script src="<?=base_url();?>assets/backend/js/simply-toast.min.js"></script>
 <style>
 /* thai */
     @font-face {

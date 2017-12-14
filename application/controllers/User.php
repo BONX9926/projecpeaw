@@ -2,7 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
+	function __construct() {
+        parent::__construct();
 
+		// $session = $this->session->userdata('sessed_in');
+		// var_dump($session);die();
+    }
 	public function from_register()
 	{
         $this->load->view('layouts/header');
@@ -11,10 +16,16 @@ class User extends CI_Controller {
 		$this->load->view('layouts/footer');
     }
     public function from_login(){
-        $this->load->view('layouts/header');
-		$this->load->view('layouts/navbar');
-		$this->load->view('user/login_v');
-		$this->load->view('layouts/footer');
+		if ($session = $this->session->userdata('sessed_in') == null) {
+			$this->load->view('layouts/header');
+			$this->load->view('layouts/navbar');
+			$this->load->view('user/login_v');
+			$this->load->view('layouts/footer');
+		}else{
+			// $session = $this->session->userdata('sessed_in');
+			// var_dump($session);
+			redirect('/');
+		}
 	}
 	
 	public function register()
@@ -54,19 +65,25 @@ class User extends CI_Controller {
 	public function login()
 	{
 		$input = $this->input->post();
-		$res = $this->check_login($input['email'], $input['password']);
-		if($res['status']){
-			$this->session->set_userdata('sessed_in',$res['session']);
-			$this->session->set_userdata('bag',$res['bag']);
-			$this->load->view('layouts/header');
-			$this->load->view('layouts/navbar');
-			$this->load->view('index');
-			$this->load->view('layouts/footer');
+		if($input){
+			$res = $this->check_login($input['email'], $input['password']);
+			if($res['status']){
+	
+				$this->session->set_userdata('sessed_in', $res['session']);
+				$this->session->set_userdata('bag', $res['bag']);
+	
+				$this->load->view('layouts/header');
+				$this->load->view('layouts/navbar');
+				$this->load->view('index');
+				$this->load->view('layouts/footer');
+			}else{
+				$this->load->view('layouts/header');
+				$this->load->view('layouts/navbar');
+				$this->load->view('login_fail_v');
+				$this->load->view('layouts/footer');
+			}
 		}else{
-			$this->load->view('layouts/header');
-			$this->load->view('layouts/navbar');
-			$this->load->view('login_fail_v');
-			$this->load->view('layouts/footer');
+			redirect('/');
 		}
 		
 	}
@@ -79,7 +96,6 @@ class User extends CI_Controller {
 		}else{
 			$res = false;
 		}
-
 		return $res;
 	}
 
@@ -115,6 +131,7 @@ class User extends CI_Controller {
 	{
 		//dev by miniball
 		$this->session->unset_userdata('sessed_in');
+		$this->session->unset_userdata('bag');
 		redirect('/');
 	}
 
@@ -139,6 +156,19 @@ class User extends CI_Controller {
 	{
 		$data['rows'] = $this->user_all();
 		$this->load->view('backend/users/users_v', $data);
+	}
+
+	public function cancel_bin(){
+		$this->session->unset_userdata('bag');
+		$this->session->set_userdata('bag');
+		redirect('/');
+	}
+
+	public function data_buy(){
+		$this->load->view('layouts/header');
+		$this->load->view('layouts/navbar');
+		$this->load->view('user/data_buy_v');
+		// $this->load->view('layouts/footer');
 	}
 
 

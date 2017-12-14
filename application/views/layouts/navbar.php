@@ -1,5 +1,15 @@
 <div style="height:60px;background-color:#F8BBD0;">
-    <h1><img src="<?=base_url()?>assets/img/logo/peaw.png" height="40px;"/>PEAW Bakery Shop <button class="btn btn-success"><span class="fa fa-shopping-bag"></span> <span class="items"><?=var_dump($_SESSION['bag'])?></span></button></h1>
+    <h1>
+        <img src="<?=base_url()?>assets/img/logo/peaw.png" height="40px;"/>PEAW Bakery Shop 
+        <button class="btn btn-success" onclick="loadmodal()" <?= (isset($_SESSION['sessed_in'])) ? '' : 'disabled="disabled"' ;?>><span class="fa fa-shopping-bag"></span> 
+        <span class="items" id="shopping-bag" ><?php if(isset($_SESSION['bag'])){ echo count($_SESSION['bag']); }else{ echo 0; }?></span>
+        </button>
+        <span id="mdClick" data-toggle="modal" data-target=".bd-example-modal-lg"></span>
+        <a href="<?=base_url();?>index.php/user/data_buy" class="btn btn-primary"><i class="fa fa-file-text-o" aria-hidden="true"></i> ข้อมูลการสั่งซื้อ</a>
+    </h1>
+</div>
+<div style="height:30px;background-color:#eeeeee;">
+    <marquee direction="left" scrollamount="8"><span style="color:red">ด่วนพิเศษวันนี้!!!</span> ใบสั่งซื้อที่มียอด 500 บาทขึ้นไป ได้รับส่วนลดพิเศษมากมายหรือสามารถส่ง ลุ้นโทรศัพท์ Iphone 8 plus และลุ้นรางวัลต่างๆมากมาย <span style="color:green">ขอสงวนสิทธิ์สำหรับผู้ที่เป็นสมาชิกเท่านั้น นะจ๊ะ ^_^</span></marquee>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-navbar">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,6 +23,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?=base_url();?>index.php/package"> แพคเก็ตของเรา<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?=base_url();?>index.php/package"> วิธีสั่งซื้อสินค้า<span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item dropdown">
@@ -65,3 +78,15 @@
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
     </div>
 </nav>
+<div id="loadmodal"></div>
+
+<script>
+function loadmodal(){
+    $.get("<?=base_url();?>index.php/products/modal_bag",() => {  
+    }).done((data) => {
+        $('#loadmodal').html(data);
+        $('#mdClick').click();
+    });
+}
+</script>
+

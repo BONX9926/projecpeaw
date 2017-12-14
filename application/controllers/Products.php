@@ -99,4 +99,70 @@ class Products extends CI_Controller {
         $this->load->view('backend/bestseller/bestseller_v', $data);
     }
 
+    public function add_itemTobag()
+    {
+        $input = $this->input->post();
+        $bag = $_SESSION['bag'];
+
+        $res = array();
+        $res['status'] = true;
+        $res['message'] = 'เพิ่มสินค้าลงในตะกร้าสำเร็จ';
+        if(isset($bag[$input['id']])){
+            $_SESSION['bag'][$input['id']]['num'] =  $input['num'];
+            // $res['message'] = 'เก่า';
+        }else{
+            // $res['message'] = 'ใหม่';
+            $data = array('num'=> $input['num'], 'name' => $input['name'], 'price' => $input['price']);
+            $_SESSION['bag'][$input['id']] = $data;
+            $res['new'] = true;
+        }
+        echo json_encode($res);
+    }
+
+    public function modal_bag()
+    {
+        $this->load->view('bag_v');
+    }
+
+    public function del_itemByBag($id)
+    {
+        unset($_SESSION['bag'][$id]);
+        $res = array();
+        $res['status'] = true;
+        $res['message'] = 'ลบการรายสินค้าสำเร็จ';
+        $res['id'] = $id;
+        echo json_encode($res);
+    }
+
+    public function order()
+    {
+        $input = $this->input->post();
+        $user = $this->session->userdata('sessed_in');
+
+        $bin = array(
+            'ref_u_id'      => $user[0]['u_id'],
+            'created_at'    => date("Y-m-d H:i:s")
+        );
+
+        $this->db->insert('bin', $bin);
+        $bin_id = $this->db->insert_id();
+
+        foreach ($input['pro_id'] as $key => $pro) {
+            $data = array(
+                'ref_pro_id'  => $input['pro_id'][$key], 
+                'price'       => $input['pro_price'][$key],
+                'num'         => $input['pro_num'][$key],
+                'ref_bin'     => $bin_id
+            );
+            $this->db->insert('order', $data);
+            echo 'success<br>';
+        }
+
+        $this->session->unset_userdata('bag');
+        $this->session->set_userdata('bag');
+
+        redirect('/');
+   
+    }
+
 }

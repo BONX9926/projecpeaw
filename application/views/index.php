@@ -42,10 +42,15 @@
 		}
     ?>
     <div class="container">
+        <div class="row">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="<?=base_url();?>assets/video/presentCake.mp4" allowfullscreen></iframe>
+        </div>
+        </div>
         <div class="row text-center">
             <?php foreach ($rows as $key => $pro) { ?>
                 <div class="col-md-4">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                    <img class="rounded-circle" src="<?=base_url();?>assets/img/products/<?=$pro->pro_pic;?>" alt="" width="140" height="140">
                     <p><h2><?=$pro->pro_name;?></h2> <span class="badge badge-danger">สินค้าขายดี</span></p>
                     <p><?=$pro->pro_detail;?></p>
                 </div>
