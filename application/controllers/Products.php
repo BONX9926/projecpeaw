@@ -144,6 +144,7 @@ class Products extends CI_Controller {
             'created_at'    => date("Y-m-d H:i:s")
         );
 
+        $this->db->trans_begin();
         $this->db->insert('bin', $bin);
         $bin_id = $this->db->insert_id();
 
@@ -155,14 +156,18 @@ class Products extends CI_Controller {
                 'ref_bin'     => $bin_id
             );
             $this->db->insert('order', $data);
-            echo 'success<br>';
         }
 
-        $this->session->unset_userdata('bag');
-        $this->session->set_userdata('bag');
-
-        redirect('/');
-   
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->trans_rollback();
+            redirect('/');
+        }else {
+            $this->db->trans_commit();
+            $this->session->unset_userdata('bag');
+            $this->session->set_userdata('bag');
+            redirect('/user/data_buy');
+        }  
     }
 
 }

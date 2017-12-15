@@ -134,20 +134,22 @@ function del(el){
     if (r == true) {
         $.post("<?=base_url();?>index.php/products/del_itemByBag/"+id, ()=> {       
         }).done((data) => {
-            console.log(data);
-            // try {
-            //     let json_res = jQuery.parseJSON(data);
+            // console.log(data);
+            try {
+                let json_res = jQuery.parseJSON(data);
 
-            //     if(json_res.status == true) {
-            //         $.simplyToast(json_res.message, 'success');
-            //         $('#bag'+json_res.id).remove();
-            //         location.reload();
-            //     } else {
-            //         $.simplyToast(json_res.message, 'danger');
-            //     }
-            // } catch (e) {
-            //     $.simplyToast(e, 'danger');
-            // }
+                if(json_res.status == true) {
+                    $.simplyToast(json_res.message, 'success');
+                    $('#bag'+json_res.id).remove();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    $.simplyToast(json_res.message, 'danger');
+                }
+            } catch (e) {
+                $.simplyToast(e, 'danger');
+            }
         });
     } else {
         alert("ยกเลิกการลบรายการนี้");

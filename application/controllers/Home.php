@@ -10,9 +10,4 @@ class Home extends CI_Controller {
 		$this->load->view('index');
 		$this->load->view('layouts/footer');
 	}
-
-	public function best(Type $var = null)
-	{
-
-	}
 }

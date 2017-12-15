@@ -97,8 +97,7 @@
           <!-- Sidebar Navidation Menus-->
           <span class="heading">Main</span>
           <ul class="list-unstyled">
-            <li class="ac active" id="users"> <a href="#"><i class="icon-user"></i>สมาชิก</a></li>
-            <li class="ac" id="orders"> <a href="#"><i class="icon-home"></i>รายการสั่งซื้อ</a></li>
+            <li class="ac active" id="orders"> <a href="#"><i class="icon-home"></i>รายการสั่งซื้อ</a></li>
             <!-- <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Dropdown </a>
               <ul id="dashvariants" class="collapse list-unstyled">
                 <li><a href="#">Page</a></li>
@@ -109,6 +108,7 @@
             </li> -->
             <li class="ac" id="best_seller"> <a href="#"> <i class="icon-grid"></i>สินค้าขายดี </a></li>
             <li class="ac" id="products_all"> <a href="#"> <i class="fa fa-bar-chart"></i>สินค้าทั้งหมด</i> </a></li>
+            <li class="ac" id="users"> <a href="#"><i class="icon-user"></i>สมาชิก</a></li>
           </ul>
           <span style="height:35vh">&nbsp;</span>
         </nav>
@@ -146,6 +146,7 @@ function getpage(id){
     orders();
   }
 }
+orders();
 function orders(){
   $.get("<?=base_url();?>index.php/order",
     function () { 
@@ -169,7 +170,7 @@ function member(){
   });
 }
 
-member();
+// member();
 
 function products_all(){
   $.get("<?=base_url();?>index.php/products",

@@ -9,7 +9,16 @@
     </h1>
 </div>
 <div style="height:30px;background-color:#eeeeee;">
-    <marquee direction="left" scrollamount="8"><span style="color:red">ด่วนพิเศษวันนี้!!!</span> ใบสั่งซื้อที่มียอด 500 บาทขึ้นไป ได้รับส่วนลดพิเศษมากมายหรือสามารถส่ง ลุ้นโทรศัพท์ Iphone 8 plus และลุ้นรางวัลต่างๆมากมาย <span style="color:green">ขอสงวนสิทธิ์สำหรับผู้ที่เป็นสมาชิกเท่านั้น นะจ๊ะ ^_^</span></marquee>
+    <marquee direction="left" scrollamount="8">
+    <?php 
+        $this->db->select('*');
+        $this->db->from('message');
+        $this->db->where('active', '1');
+        $this->db->limit(1);
+        $mess = $this->db->get();
+    ?>
+        <?=$mess->result()[0]->mess_text;?>
+    </marquee>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-navbar">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
