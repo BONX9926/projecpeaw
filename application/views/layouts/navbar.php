@@ -5,7 +5,8 @@
         <span class="items" id="shopping-bag" ><?php if(isset($_SESSION['bag'])){ echo count($_SESSION['bag']); }else{ echo 0; }?></span>
         </button>
         <span id="mdClick" data-toggle="modal" data-target=".bd-example-modal-lg"></span>
-        <a href="<?=base_url();?>index.php/user/data_buy" class="btn btn-primary"><i class="fa fa-file-text-o" aria-hidden="true"></i> ข้อมูลการสั่งซื้อ</a>
+        <?= (isset($_SESSION['sessed_in'])) ? '<a href="<?=base_url();?>index.php/user/data_buy" class="btn btn-primary"><i class="fa fa-file-text-o" aria-hidden="true"></i> ข้อมูลการสั่งซื้อ</a>' : '' ;?>
+        
     </h1>
 </div>
 <div style="height:30px;background-color:#eeeeee;">

@@ -196,8 +196,8 @@ class User extends CI_Controller {
 
 		$this->db->select('*');
 		$this->db->from('bin');
-		$this->db->where('pay_status', 1*1);
-		$this->db->where('ref_status_bin', 2*1);
+		$this->db->where('pay_status', 1);
+		$this->db->where('ref_status_bin', 2);
 		$this->db->where('ref_u_id', $session[0]['u_id']);
 		$this->db->order_by('created_at', 'DESC');
 		$query = $this->db->get();
@@ -217,7 +217,7 @@ class User extends CI_Controller {
 						$items = $query2->result_array();
 						// print_r($items);
 						foreach ($items as $k => $v) {
-							$list[] = $v['pro_name']." จำนวน ".$v['num']." ชิ้น ราคา ".$v['price']." บาท<br>";
+							$list[] = $v['pro_name']." จำนวน ".$v['num']." ชิ้น ราคาต่อชิ้น ".$v['price']." บาท<br>";
 							$total[] = $v['price']*$v['num'];
 						}
 						// var_dump($list);
@@ -267,6 +267,13 @@ class User extends CI_Controller {
 					);
 
 					$insert = $this->db->insert('payment', $payment);
+					$pay_id = $this->db->insert_id();
+					$pay_id_insert = array(
+						'ref_pay_id' => $pay_id
+					);
+					
+					$this->db->where('bin_id', $input['bin_id']);
+					$update = $this->db->update('bin', $pay_id_insert);
 					if ($insert) {
 						$return['status'] = true;
 						$return['message'] = "แจ้งชำระเรียบร้อยแล้ว";

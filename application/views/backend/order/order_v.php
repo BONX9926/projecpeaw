@@ -25,12 +25,12 @@
             <tbody>
             <?php foreach ($rows as $key => $order) { ?>
                 <tr id="bin<?=$order->bin_id;?>">
-                    <td scope="row"><a href="#" onclick="showBin($(this))"><?=$order->bin_id;?></a></td>
+                    <td scope="row"><a href="#" onclick="showBin($(this))"><?="PO".sprintf("%06d", $order->bin_id);?></a></td>
                     <td><?=$order->created_at;?></td>
                     <td><?=$order->u_name;?></td>
                     <td><?=$order->u_phone;?></td>
                     <td>
-                    <?= ($order->pay_status =='1') ? "<sapn class='text-success'>แจ้งชำระแล้ว <a href='#' attr-id='".$order->bin_id."' onclick='check($(this))' style='font-size:20px;'>คลิก</a></span>" : "<sapn class='text-danger'>ยังไม่ได้แจ้งชำระ</span>";?>
+                    <?= ($order->pay_status ==1) ? "<sapn class='text-success'>แจ้งชำระแล้ว <a href='#' attr-id='".$order->ref_pay_id."' onclick='check($(this))' style='font-size:20px;'>คลิก</a></span>" : "<sapn class='text-danger'>ยังไม่ได้แจ้งชำระ</span>";?>
                     </td>
                     <td>
                         <select class="form-control" onchange="update_status_bin($(this))" attr-id="<?=$order->bin_id;?>">
@@ -58,7 +58,7 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="content_pay">
             
         </div>
         <div class="modal-footer">
@@ -72,13 +72,13 @@
 <div class="mdBin modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">เลขที่บิล</h5>
+        <!-- <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">รายการสั่งซื้อ</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
-        </div>
-        <div class="modal-body">
+        </div> -->
+        <div class="modal-body" id="content_bin">
             
         </div>
         <div class="modal-footer">
@@ -91,19 +91,33 @@
 <script>
 function check(el){
     var bin_id = el.attr('attr-id');
-    alert(bin_id);
-    $('.mdCheck').modal('show');
+    // alert(bin_id);
+    $.post("<?=base_url();?>index.php/order/check_pay/"+bin_id, () => {
+            
+    }).done((data) => {
+
+        $('.mdCheck').modal('show');
+        $('#content_pay').html(data);           
+
+    });
 }
 
 function showBin(el){
-    var bin_id = el.text();
-    alert(bin_id);
-    $('.mdBin').modal('show');
+    var bin_id = el.text().substring(2)*1;
+
+    $.post("<?=base_url();?>index.php/order/lists_inBin/"+bin_id, () => {
+            
+    }).done((data) => {
+
+        $('#content_bin').html(data);           
+        $('.mdBin').modal('show');
+
+    });
 }
 function update_status_bin(el){
     var bin_id = el.attr('attr-id');
     var status = el.val();
-
+    // alert(status);
     $.post("<?=base_url();?>index.php/order/update_status_bin/"+bin_id+'/'+status,() => {
     }).done((data) => {
             try {
@@ -122,20 +136,26 @@ function update_status_bin(el){
 
 function del_bin(el){
     var bin_id = el.attr('attr-id');
-    $.post("<?=base_url();?>index.php/order/del_bin/"+bin_id,() => {
-    }).done((data) => {
-            try {
-                let json_res = jQuery.parseJSON(data);
 
-                if(json_res.status == true) {
-                    $.simplyToast(json_res.message, 'success');
-                    $("#bin"+json_res.id).remove();
-                } else {
-                    $.simplyToast(json_res.message, 'danger');
+    var r = confirm("ต้องการลบบิลนี้ใชไหม");
+    if (r == true) {
+        $.post("<?=base_url();?>index.php/order/del_bin/"+bin_id,() => {
+        }).done((data) => {
+                try {
+                    let json_res = jQuery.parseJSON(data);
+
+                    if(json_res.status == true) {
+                        $.simplyToast(json_res.message, 'success');
+                        $("#bin"+json_res.id).remove();
+                    } else {
+                        $.simplyToast(json_res.message, 'danger');
+                    }
+                } catch (e) {
+                    $.simplyToast(e, 'danger');
                 }
-            } catch (e) {
-                $.simplyToast(e, 'danger');
-            }
-    });
+        });
+    } else {
+       alert('ยกเลิกการลบบิลเรียบร้อย');
+    }
 }
 </script>

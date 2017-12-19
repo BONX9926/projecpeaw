@@ -46,7 +46,7 @@
     <tbody>
     <?php foreach($rows as $key => $bin) { ?>
     <tr>
-        <td><?=$bin['bin_id']; ?></td>
+        <td><?="PO".sprintf("%06d", $bin['bin_id']);?></td>
         <td>
             <?php foreach($bin['list'] as $k => $list) {?>
                 

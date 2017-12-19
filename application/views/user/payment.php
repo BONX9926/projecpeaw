@@ -16,7 +16,7 @@
         <form id="<?=$bin->bin_id;?>" method="POST" enctype="multipart/formdata">
             <div class="input-group input-group-sm">
                 <input type="file" name="img" class="form-control input-sm">
-                <input type="text" name="bin_id" class="form-control input-sm" value="<?=$bin->bin_id;?>">
+                <input type="hidden" name="bin_id" class="form-control input-sm" value="<?=$bin->bin_id;?>">
             </div>
         </form>
         </td>

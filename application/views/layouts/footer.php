@@ -5,11 +5,11 @@
         <div class="col-md-3 col-sm-6">
             <!--Column1-->
             <div class="footer-pad">
-            <h4>Address</h4>
+            <h4>About Us</h4>
             <address>
                 <ul class="list-unstyled">
                     <li>
-                        City Hall<br>
+                        <a href="http://nisakorn.com/student/chanika/">nisakorn.com/student/chanika</a><br>
                         212  Street<br>
                         Lawoma<br>
                         735<br>

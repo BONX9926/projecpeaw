@@ -15,6 +15,7 @@ class Order extends CI_Controller {
 			bin.ref_u_id, 
 			bin.created_at, 
 			bin.pay_status, 
+			bin.ref_pay_id, 
 			bin.active, 
 			ref_status_bin, 
 			users.u_id, 
@@ -85,6 +86,65 @@ class Order extends CI_Controller {
 		}
 
 		echo json_encode($res);
+	}
+
+	public function lists_order($bin_id)
+	{
+		$this->db->select('*');
+		$this->db->from('bin');
+		$this->db->join('order', 'order.ref_bin = bin.bin_id');
+		$this->db->join('products', 'products.pro_id = order.ref_pro_id');
+		$this->db->where('bin.bin_id', $bin_id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			$res = $query->result();
+		}else{
+			$res = null;
+		}
+
+		// return $res;
+		echo '<pre>';
+		print_r($res);
+	}
+
+	
+	public function lists_inBin($bin_id)
+	{
+		$this->db->select('*');
+		$this->db->from('bin');
+		$this->db->join('order', 'order.ref_bin = bin.bin_id');
+		$this->db->join('products', 'products.pro_id = order.ref_pro_id');
+		$this->db->where('bin.bin_id', $bin_id);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			$data['row'] = $query->result();
+			$data['num_bin'] = "PO".sprintf('%06d', $bin_id);
+		}else{
+			$data['row'] = null;
+		}
+
+		$this->load->view('backend/order/lists_in_bin', $data);
+		
+	}
+
+	public function check_pay($pay_id)
+	{
+		$this->db->select('*');
+		$this->db->from('payment');
+		$this->db->where('pay_id', $pay_id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			$data['row'] = $query->result();
+		}else{
+			$data['row'] = null;
+		}
+		
+		$this->load->view('backend/order/pay_bin', $data);
 	}
 	
 }

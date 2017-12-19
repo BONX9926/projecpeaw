@@ -118,7 +118,7 @@ function get_page(id){
 
 function payment(){
   // alert("pagePayment");
-  $.get("<?=base_url();?>index.php/user/pagePayment",() => {
+  $.get("<?=base_url();?>user/pagePayment",() => {
   }).done((data) => {
     $('#content_databuy').html(data);
   });
@@ -126,7 +126,7 @@ function payment(){
 
 function history_buy(){
   // alert("pageHistory");
-  $.get("<?=base_url();?>index.php/user/pageHistoryBuy",() => {
+  $.get("<?=base_url();?>user/pageHistoryBuy",() => {
   }).done((data) => {
     $('#content_databuy').html(data);    
   });
